@@ -1,6 +1,6 @@
 import React from "react";
-import {Outlet} from "react-router-dom";
 import DashboardLayout from "./layout/DashboardLayout";
+import DashboardPage from "./Pages/Dashboard";
 
 const dashboardRouter =
     {
@@ -9,7 +9,7 @@ const dashboardRouter =
         children: [
             {
                 path: "",
-                element: <>sdsd </>
+                element: <DashboardPage/>,
             }, {
                 path: "home",
                 element: <>dashboard Home Page </>
