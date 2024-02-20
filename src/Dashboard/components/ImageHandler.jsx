@@ -1,5 +1,5 @@
-import   {useState} from "react";
- import { styled } from '@mui/material/styles';
+import {useState} from "react";
+import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
@@ -26,15 +26,16 @@ const UploadAndDisplayImage = () => {
             <Button
                 component="label"
                 role={undefined}
+                color='info'
                 variant="contained"
                 tabIndex={-1}
-                startIcon={<CloudUploadIcon />}
+                startIcon={<CloudUploadIcon/>}
             >
-                Upload file
-                <VisuallyHiddenInput type="file"     name="myImage" onChange={(event) => {
+                Upload Image
+                <VisuallyHiddenInput type="file" name="myImage" onChange={(event) => {
                     console.log(event.target.files[0]);
                     setSelectedImage(event.target.files[0]);
-                }}  />
+                }}/>
             </Button>
 
         </div>

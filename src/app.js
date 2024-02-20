@@ -1,9 +1,9 @@
 import {ColorModeContext, useMode} from "./Dashboard/theme";
 import "../node_modules/@milon27/react-sidebar/dist/react-sidebar.css";
 import {CssBaseline, ThemeProvider} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-import {BrowserRouter, createBrowserRouter, RouterProvider} from "react-router-dom";
+import {BrowserRouter, createBrowserRouter, RouterProvider, useLocation} from "react-router-dom";
 import dashboardRouter from "./Dashboard/DashboardRouter";
 import store from "./Dashboard/Data/Store/store";
 import {Provider} from "react-redux";

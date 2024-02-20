@@ -5,21 +5,39 @@ export const categoriesApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_BASE_API_URL,
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token').replaceAll('"','')}`
+            "content-type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('token').replaceAll('"', '')}`
         },
     }),
     endpoints: (builder) => ({
         getCategories: builder.query({
             query: () => 'categories',
+            providesTags: ['categories'],
         }),
         deleteCategory: builder.mutation(
             {
-                query: ({id}) => ({
-                    url: `categories/${id}`,
-                    method: 'DELETE',
-                }),
+                query: ({id}) => {
+                    return ({
+                        url: `categories/${id}`,
+                        method: 'DELETE',
+                    });
+                },
+                invalidatesTags: ['categories'],
+            }
+        ),
+        addCategory: builder.mutation(
+            {
+                query: (payload) => {
+                    console.log(payload)
+                    return ({
+                        url: 'add-cat',
+                        method: 'POST',
+                        body: payload,
+                    })
+                },
+                invalidatesTags: ['categories'],
             }
         )
     })
 })
-export const {useGetCategoriesQuery} = categoriesApi;
+export const {useGetCategoriesQuery, useAddCategoryMutation, useDeleteCategoryMutation} = categoriesApi;

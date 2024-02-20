@@ -11,6 +11,8 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import dashboardRoutes from "../Data/DashboardRoutes";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import ElectricMopedIcon from '@mui/icons-material/ElectricMoped';
+import {UserSwitchOutlined} from "@ant-design/icons";
+import {FaUsersGear} from "react-icons/fa6";
 
 const Item = ({title, to, icon, selected, setSelected}) => {
     const theme = useTheme();
@@ -123,6 +125,14 @@ const Sidebar = () => {
                             title="Dashboard"
                             to={dashboardRoutes.dashboard}
                             icon={<HomeOutlinedIcon/>}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Users"
+                            to={dashboardRoutes.users}
+                            icon={<FaUsersGear/>
+                            }
                             selected={selected}
                             setSelected={setSelected}
                         />

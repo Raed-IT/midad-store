@@ -4,10 +4,11 @@ export const authApi = createApi({
     reducerPath: 'Api/auth',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_BASE_API_URL,
-
     }),
     endpoints: (builder) => ({
-        login: builder.mutation(
+
+
+       login: builder.mutation(
             {
                 query: (payload) => {
                     return ({
@@ -17,8 +18,10 @@ export const authApi = createApi({
 
                     })
                 },
+
             }
-        )
+        ),
+
     })
 })
 export const {useLoginMutation} = authApi;

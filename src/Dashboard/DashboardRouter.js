@@ -8,6 +8,9 @@ import CategoriesPage from "./Pages/CategoriesPages/CategoriesPage";
 import OrdersPage from "./Pages/OrdersPages/OrdersPage";
 import {ProtectedRoute} from "./components/ProtectedRouteComponent";
 import {LoginPage} from "./Pages/authPages/loginPage";
+import UsersPage from "./Pages/UsedrsPages/UsersPage";
+import AddCategoryPage from "./Pages/CategoriesPages/AddCategoryPage";
+import AddUserPage from "./Pages/UsedrsPages/AddUserPage";
 
 const dashboardRouter =
     [{
@@ -23,12 +26,22 @@ const dashboardRouter =
                 element: <ProductsPage/>,
             },
             {
+                path: dashboardRoutes.users,
+                element: <UsersPage/>,
+            }, {
+                path: dashboardRoutes.addUsers,
+                element: <AddUserPage/>,
+            },
+            {
                 path: dashboardRoutes.addProduct,
                 element: <AddProductPage/>,
             },
             {
                 path: dashboardRoutes.categories,
                 element: <CategoriesPage/>,
+            }, {
+                path: dashboardRoutes.addCtegory,
+                element: <AddCategoryPage/>,
             },
 
         ],
@@ -36,7 +49,8 @@ const dashboardRouter =
     },
         {
             path: dashboardRoutes.login,
-            element:<LoginPage/>
+            element: <LoginPage/>,
+            errorElement: <>Not Found</>
         }
     ];
 export default dashboardRouter;

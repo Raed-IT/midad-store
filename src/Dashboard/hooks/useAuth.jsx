@@ -21,9 +21,8 @@ export const AuthProvider = ({children}) => {
     const login = async (data) => {
         loginRequest(data).unwrap()
             .then((payload) => {
-                setToken(payload.token);
+                setToken(payload?.token);
                 setUser(payload?.user);
-                console.log(token)
             })
             .catch((error) => toast.error(error?.data.message));
 

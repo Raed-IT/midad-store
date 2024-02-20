@@ -3,6 +3,7 @@ import {statisticsApi} from "../Api/StatisticsApi";
 import {productsApi} from "../Api/ProductsApi";
 import {categoriesApi} from "../Api/CategoriesApi";
 import {authApi} from "../Api/authApi";
+import {usersApi} from "../Api/usersApi";
 
 const middlewares = [
         authApi.middleware,
@@ -10,6 +11,7 @@ const middlewares = [
         statisticsApi.middleware,
         productsApi.middleware,
         categoriesApi.middleware,
+        usersApi.middleware,
     ]
 ;
 export default middlewares;
