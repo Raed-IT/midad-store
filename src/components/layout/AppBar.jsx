@@ -56,7 +56,7 @@ function AppBar() {
 
     // logout callback
     const onLogout = async () => {
-        // reset cookie        
+        // reset cookie
         setCookie('token', null)
 
         // check token

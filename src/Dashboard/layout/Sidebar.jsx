@@ -1,21 +1,16 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ProSidebar, Menu, MenuItem} from "react-pro-sidebar";
 import {Box, IconButton, Typography, useTheme} from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import {tokens} from "../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import dashboardRoutes from "../Data/DashboardRoutes";
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import ElectricMopedIcon from '@mui/icons-material/ElectricMoped';
 
 const Item = ({title, to, icon, selected, setSelected}) => {
     const theme = useTheme();
@@ -36,11 +31,17 @@ const Item = ({title, to, icon, selected, setSelected}) => {
 };
 
 const Sidebar = () => {
+    const location = useLocation();
+    const {hash, pathname, search} = location;
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
-
+    // useEffect(() => {
+    //     const currentRouter=pathname.replace('/',"").toUpperCase;
+    //     setSelected(currentRouter);
+    //     console.log(router)
+    // }, [pathname]);
     return (
         <Box
             sx={{
@@ -96,7 +97,7 @@ const Sidebar = () => {
                                     alt="profile-user"
                                     width="100px"
                                     height="100px"
-                                    src={`../../assets/user.png`}
+                                    src={`http://lms.theitsea.com/pluginfile.php/1/core_admin/logo/0x150/1692686692/%D8%B4%D8%B9%D8%A7%D8%B1%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%201000%D9%85%D8%A8%D8%B1%D9%85%D8%AC%20%281%29.png`}
                                     style={{cursor: "pointer", borderRadius: "50%"}}
                                 />
                             </Box>
@@ -107,10 +108,11 @@ const Sidebar = () => {
                                     fontWeight="bold"
                                     sx={{m: "10px 0 0 0"}}
                                 >
-                                    Ed Roh
+
+                                    Raed Swan
                                 </Typography>
                                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                                    VP Fancy Admin
+                                    Full Stack Developer
                                 </Typography>
                             </Box>
                         </Box>
@@ -119,7 +121,7 @@ const Sidebar = () => {
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
                         <Item
                             title="Dashboard"
-                            to="/"
+                            to={dashboardRoutes.dashboard}
                             icon={<HomeOutlinedIcon/>}
                             selected={selected}
                             setSelected={setSelected}
@@ -130,94 +132,101 @@ const Sidebar = () => {
                             color={colors.grey[300]}
                             sx={{m: "15px 0 5px 20px"}}
                         >
-                            Data
+                            Store
                         </Typography>
                         <Item
-                            title="Manage Team"
-                            to="/team"
-                            icon={<PeopleOutlinedIcon/>}
+                            title="Categories"
+                            to={dashboardRoutes.categories}
+                            icon={<AppRegistrationIcon/>}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
-                            title="Contacts Information"
-                            to="/contacts"
-                            icon={<ContactsOutlinedIcon/>}
+                            title="Products"
+                            to={dashboardRoutes.products}
+                            icon={<StorefrontIcon/>}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
-                            title="Invoices Balances"
-                            to="/invoices"
-                            icon={<ReceiptOutlinedIcon/>}
+                            title="Orders"
+                            to={dashboardRoutes.orders}
+                            icon={<ElectricMopedIcon/>}
                             selected={selected}
                             setSelected={setSelected}
                         />
+                        {/*<Item*/}
+                        {/*    title="Invoices Balances"*/}
+                        {/*    to="/invoices"*/}
+                        {/*    icon={<ReceiptOutlinedIcon/>}*/}
+                        {/*    selected={selected}*/}
+                        {/*    setSelected={setSelected}*/}
+                        {/*/>*/}
 
-                        <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{m: "15px 0 5px 20px"}}
-                        >
-                            Pages
-                        </Typography>
-                        <Item
-                            title="Profile Form"
-                            to="/form"
-                            icon={<PersonOutlinedIcon/>}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Calendar"
-                            to="/calendar"
-                            icon={<CalendarTodayOutlinedIcon/>}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="FAQ Page"
-                            to="/faq"
-                            icon={<HelpOutlineOutlinedIcon/>}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+                        {/*<Typography*/}
+                        {/*    variant="h6"*/}
+                        {/*    color={colors.grey[300]}*/}
+                        {/*    sx={{m: "15px 0 5px 20px"}}*/}
+                        {/*>*/}
+                        {/*    Pages*/}
+                        {/*</Typography>*/}
+                        {/*<Item*/}
+                        {/*    title="Profile Form"*/}
+                        {/*    to="/form"*/}
+                        {/*    icon={<PersonOutlinedIcon/>}*/}
+                        {/*    selected={selected}*/}
+                        {/*    setSelected={setSelected}*/}
+                        {/*/>*/}
+                        {/*<Item*/}
+                        {/*    title="Calendar"*/}
+                        {/*    to="/calendar"*/}
+                        {/*    icon={<CalendarTodayOutlinedIcon/>}*/}
+                        {/*    selected={selected}*/}
+                        {/*    setSelected={setSelected}*/}
+                        {/*/>*/}
+                        {/*<Item*/}
+                        {/*    title="FAQ Page"*/}
+                        {/*    to="/faq"*/}
+                        {/*    icon={<HelpOutlineOutlinedIcon/>}*/}
+                        {/*    selected={selected}*/}
+                        {/*    setSelected={setSelected}*/}
+                        {/*/>*/}
 
-                        <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{m: "15px 0 5px 20px"}}
-                        >
-                            Charts
-                        </Typography>
-                        <Item
-                            title="Bar Chart"
-                            to="/bar"
-                            icon={<BarChartOutlinedIcon/>}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Pie Chart"
-                            to="/pie"
-                            icon={<PieChartOutlineOutlinedIcon/>}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Line Chart"
-                            to="/line"
-                            icon={<TimelineOutlinedIcon/>}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Geography Chart"
-                            to="/geography"
-                            icon={<MapOutlinedIcon/>}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+                        {/*<Typography*/}
+                        {/*    variant="h6"*/}
+                        {/*    color={colors.grey[300]}*/}
+                        {/*    sx={{m: "15px 0 5px 20px"}}*/}
+                        {/*>*/}
+                        {/*    Charts*/}
+                        {/*</Typography>*/}
+                        {/*<Item*/}
+                        {/*    title="Bar Chart"*/}
+                        {/*    to="/bar"*/}
+                        {/*    icon={<BarChartOutlinedIcon/>}*/}
+                        {/*    selected={selected}*/}
+                        {/*    setSelected={setSelected}*/}
+                        {/*/>*/}
+                        {/*<Item*/}
+                        {/*    title="Pie Chart"*/}
+                        {/*    to="/pie"*/}
+                        {/*    icon={<PieChartOutlineOutlinedIcon/>}*/}
+                        {/*    selected={selected}*/}
+                        {/*    setSelected={setSelected}*/}
+                        {/*/>*/}
+                        {/*<Item*/}
+                        {/*    title="Line Chart"*/}
+                        {/*    to="/line"*/}
+                        {/*    icon={<TimelineOutlinedIcon/>}*/}
+                        {/*    selected={selected}*/}
+                        {/*    setSelected={setSelected}*/}
+                        {/*/>*/}
+                        {/*<Item*/}
+                        {/*    title="Geography Chart"*/}
+                        {/*    to="/geography"*/}
+                        {/*    icon={<MapOutlinedIcon/>}*/}
+                        {/*    selected={selected}*/}
+                        {/*    setSelected={setSelected}*/}
+                        {/*/>*/}
                     </Box>
                 </Menu>
             </ProSidebar>

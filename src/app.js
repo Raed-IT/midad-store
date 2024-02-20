@@ -3,20 +3,35 @@ import "../node_modules/@milon27/react-sidebar/dist/react-sidebar.css";
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {useState} from "react";
 
- import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {BrowserRouter, createBrowserRouter, RouterProvider} from "react-router-dom";
 import dashboardRouter from "./Dashboard/DashboardRouter";
+import store from "./Dashboard/Data/Store/store";
+import {Provider} from "react-redux";
+import {AuthProvider} from "./Dashboard/hooks/useAuth";
+import {Toaster} from "react-hot-toast";
 
 function App() {
+
     const [theme, colorMode] = useMode();
     return (
+
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
-                <CssBaseline/>
-                <RouterProvider router={createBrowserRouter([
-                    dashboardRouter,
-                ])}/>
+
+                <Provider store={store}>
+                    <AuthProvider>
+                        <CssBaseline/>
+                        <RouterProvider router={createBrowserRouter([
+                            ...dashboardRouter,
+                        ],)}/>
+
+                    </AuthProvider>
+                </Provider>
+                <Toaster/>
             </ThemeProvider>
         </ColorModeContext.Provider>
+
+
     );
 }
 
