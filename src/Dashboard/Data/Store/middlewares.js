@@ -4,6 +4,7 @@ import {productsApi} from "../Api/ProductsApi";
 import {categoriesApi} from "../Api/CategoriesApi";
 import {authApi} from "../Api/authApi";
 import {usersApi} from "../Api/usersApi";
+import {ordersApi} from "../Api/ordersApi";
 
 const middlewares = [
         authApi.middleware,
@@ -12,6 +13,7 @@ const middlewares = [
         productsApi.middleware,
         categoriesApi.middleware,
         usersApi.middleware,
+        ordersApi.middleware,
     ]
 ;
 export default middlewares;

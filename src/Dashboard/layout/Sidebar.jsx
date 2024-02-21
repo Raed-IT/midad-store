@@ -105,13 +105,13 @@ const Sidebar = () => {
                             </Box>
                             <Box textAlign="center">
                                 <Typography
-                                    variant="h2"
+                                    variant="h3"
                                     color={colors.grey[100]}
                                     fontWeight="bold"
                                     sx={{m: "10px 0 0 0"}}
                                 >
 
-                                    Raed Swan
+                                    Raed Swan - Ehsan Jamor
                                 </Typography>
                                 <Typography variant="h5" color={colors.greenAccent[500]}>
                                     Full Stack Developer
@@ -145,9 +145,9 @@ const Sidebar = () => {
                             Store
                         </Typography>
                         <Item
-                            title="Categories"
-                            to={dashboardRoutes.categories}
-                            icon={<AppRegistrationIcon/>}
+                            title="Orders"
+                            to={dashboardRoutes.orders}
+                            icon={<ElectricMopedIcon/>}
                             selected={selected}
                             setSelected={setSelected}
                         />
@@ -159,9 +159,9 @@ const Sidebar = () => {
                             setSelected={setSelected}
                         />
                         <Item
-                            title="Orders"
-                            to={dashboardRoutes.orders}
-                            icon={<ElectricMopedIcon/>}
+                            title="Categories"
+                            to={dashboardRoutes.categories}
+                            icon={<AppRegistrationIcon/>}
                             selected={selected}
                             setSelected={setSelected}
                         />

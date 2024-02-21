@@ -13,6 +13,7 @@ import AddCategoryPage from "./Pages/CategoriesPages/AddCategoryPage";
 import AddUserPage from "./Pages/UsedrsPages/AddUserPage";
 import EditCategoryPage from "./Pages/CategoriesPages/EditCategoryPage";
 import EditProductPage from "./Pages/ProductsPages/EditProductPage";
+import ShowOrdersPage from "./Pages/OrdersPages/ShowOrderPage";
 
 const dashboardRouter =
     [{
@@ -30,6 +31,10 @@ const dashboardRouter =
             {
                 path: dashboardRoutes.orders,
                 element: <OrdersPage/>,
+            },
+            {
+                path: dashboardRoutes.showOrders,
+                element: <ShowOrdersPage/>,
             },
             {
                 path: dashboardRoutes.users,

@@ -12,6 +12,7 @@ const dashboardRoutes = {
 
     //orders
     orders: '/dashboard/orders',
+    showOrders: '/dashboard/show-order',
     //categories
     categories: '/dashboard/categories',
     addCategory: '/dashboard/add-category',

@@ -122,7 +122,7 @@ const ProductsPage = () => {
                 />}
             </Box>
             <Dialog keepMounted onClose={() => setIsOpen(false)} transitionDuration={10} open={isOpen}>
-                <DialogTitle>Delete Category</DialogTitle>
+                <DialogTitle>Delete Product</DialogTitle>
                 <DialogContent color={"info"}>
                     Do you wont Delete the ` {selectedProduct?.name} `
                     <Box sx={{
@@ -147,7 +147,7 @@ const ProductsPage = () => {
                 </DialogContent>
             </Dialog>
             <Dialog keepMounted onClose={() => setIsOpen(false)} transitionDuration={10} open={isOpen} color={'red'}>
-                <DialogTitle>Delete Category</DialogTitle>
+                <DialogTitle>Delete Product</DialogTitle>
                 <DialogContent color={"info"}>
                     Do you wont Delete the ` {selectedProduct?.name} `
                     <Box sx={{

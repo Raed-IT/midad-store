@@ -118,7 +118,7 @@ const UsersPage = () => {
                 />}
             </Box>
             <Dialog keepMounted onClose={() => setIsOpen(false)} transitionDuration={10} open={isOpen} color={'red'}>
-                <DialogTitle>Delete Category</DialogTitle>
+                <DialogTitle>Delete User</DialogTitle>
                 <DialogContent color={"info"}>
                     Do you wont Delete the ` {selectedUser?.name} `
                     <Box sx={{
