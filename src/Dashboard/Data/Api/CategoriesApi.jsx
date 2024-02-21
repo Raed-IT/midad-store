@@ -37,7 +37,23 @@ export const categoriesApi = createApi({
                 },
                 invalidatesTags: ['categories'],
             }
+        ),
+        updateCategory: builder.mutation(
+            {
+                query: ({id, payload}) => {
+                    return ({
+                        url: `edit-cat/${id}`,
+                        method: 'PUT',
+                        body: payload,
+                    })
+                },
+                invalidatesTags: ['categories'],
+            }
         )
     })
 })
-export const {useGetCategoriesQuery, useAddCategoryMutation, useDeleteCategoryMutation} = categoriesApi;
+export const {
+    useGetCategoriesQuery,
+    useAddCategoryMutation,
+    useUpdateCategoryMutation,
+    useDeleteCategoryMutation} = categoriesApi;

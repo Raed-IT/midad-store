@@ -9,6 +9,7 @@ import store from "./Dashboard/Data/Store/store";
 import {Provider} from "react-redux";
 import {AuthProvider} from "./Dashboard/hooks/useAuth";
 import {Toaster} from "react-hot-toast";
+import Container from "@mui/material/Container";
 
 function App() {
 
@@ -23,6 +24,10 @@ function App() {
                         <CssBaseline/>
                         <RouterProvider router={createBrowserRouter([
                             ...dashboardRouter,
+                            {
+                                path:'/',
+                                errorElement:<Container width='100%'> Not Found </Container>,
+                            }
                         ],)}/>
 
                     </AuthProvider>

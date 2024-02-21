@@ -1,4 +1,4 @@
-import {Box, Button} from "@mui/material";
+import {Box, Button, Dialog, DialogContent, DialogTitle} from "@mui/material";
 import {DataGrid, GridActionsCellItem, GridToolbar} from "@mui/x-data-grid";
 import {mockDataContacts} from "../../../../data/mockData";
 import Header from "../../../components/Header";
@@ -6,19 +6,26 @@ import {useTheme} from "@mui/material";
 import {tokens} from "../../../theme";
 import {useNavigate} from "react-router-dom";
 import dashboardRoutes from "../../../Data/DashboardRoutes";
-import {useGetProductsQuery} from "../../../Data/Api/ProductsApi";
+import {useDeleteProductMutation, useGetProductsQuery} from "../../../Data/Api/ProductsApi";
 import LoadingComponent from "../../../components/Loading";
 import {MdOutlineDelete} from "react-icons/md";
 import {FaRegEdit} from "react-icons/fa";
 import {BiShow} from "react-icons/bi";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const ProductsPage = () => {
     const {data, error, isLoading} = useGetProductsQuery();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const navigate = useNavigate();
+    const [deletedProductRequest, {isLoading: isDelete}] = useDeleteProductMutation();
+
+    const [selectedProduct, setSelectedProduct] = useState();
+
+    const [isOpen, setIsOpen] = useState(false);
+
     useEffect(() => {
         if (error) {
             toast.error(error?.error);
@@ -52,10 +59,14 @@ const ProductsPage = () => {
         {
             field: 'actions',
             type: 'actions', flex: 1,
-            getActions: (sd) => [
-                <GridActionsCellItem icon={<MdOutlineDelete/>} label="Delete"/>,
-                <GridActionsCellItem icon={<FaRegEdit/>} label="Edit"/>,
-                <GridActionsCellItem icon={<BiShow/>} label="show"/>,
+            getActions: (props) => [
+                <GridActionsCellItem onClick={() => {
+                    setSelectedProduct(props.row);
+                    setIsOpen(true)
+                }} icon={<MdOutlineDelete/>} label="Delete"/>,
+                <GridActionsCellItem onClick={() => {
+                    navigate(dashboardRoutes.editProduct, {state: props.row});
+                }} icon={<FaRegEdit/>} label="Edit"/>,
             ]
         }
     ];
@@ -110,6 +121,56 @@ const ProductsPage = () => {
                     components={{Toolbar: GridToolbar}}
                 />}
             </Box>
+            <Dialog keepMounted onClose={() => setIsOpen(false)} transitionDuration={10} open={isOpen}>
+                <DialogTitle>Delete Category</DialogTitle>
+                <DialogContent color={"info"}>
+                    Do you wont Delete the ` {selectedProduct?.name} `
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        paddingTop: 5,
+                        justifyContent: 'space-between'
+                    }}>
+                        <LoadingButton loading={isDelete} onClick={async () => {
+                            await deletedProductRequest(selectedProduct).then(() => {
+                                setIsOpen(false);
+                                toast.success("don Deleted");
+                            })
+                        }} variant="outlined" color='error'>
+                            Delete
+                        </LoadingButton>
+                        <Button color='info' variant="outlined" onClick={() => {
+                            setIsOpen(false);
+                            setSelectedProduct(null);
+                        }}>Cancel</Button>
+                    </Box>
+                </DialogContent>
+            </Dialog>
+            <Dialog keepMounted onClose={() => setIsOpen(false)} transitionDuration={10} open={isOpen} color={'red'}>
+                <DialogTitle>Delete Category</DialogTitle>
+                <DialogContent color={"info"}>
+                    Do you wont Delete the ` {selectedProduct?.name} `
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        paddingTop: 5,
+                        justifyContent: 'space-between'
+                    }}>
+                        <LoadingButton loading={isDelete} onClick={async () => {
+                            await deletedProductRequest(selectedProduct).then(() => {
+                                setIsOpen(false);
+                                toast.success("don Deleted");
+                            })
+                        }} variant="outlined" color='error'>
+                            Delete
+                        </LoadingButton>
+                        <Button color='info' variant="outlined" onClick={() => {
+                            setIsOpen(false);
+                            setSelectedProduct(null);
+                        }}>Cancel</Button>
+                    </Box>
+                </DialogContent>
+            </Dialog>
 
         </Box>
     );

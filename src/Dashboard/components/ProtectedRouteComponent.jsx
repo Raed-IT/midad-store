@@ -7,7 +7,6 @@ export const ProtectedRoute = ({children}) => {
     const {token} = useAuth();
     if (!token) {
         navigate(dashboardRoutes.login);
-        return <Navigate to={dashboardRoutes.login}/>;
     }
     return children;
 };

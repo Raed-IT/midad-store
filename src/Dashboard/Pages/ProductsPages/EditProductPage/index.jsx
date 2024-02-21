@@ -2,23 +2,27 @@ import {Box, Button, Dialog, DialogContent, DialogTitle, OutlinedInput, TextFiel
 import {Formik} from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {useAddProductMutation, useDeleteProductMutation} from "../../../Data/Api/ProductsApi";
+import {useAddProductMutation, useDeleteProductMutation, useUpdateProductMutation} from "../../../Data/Api/ProductsApi";
 import toast from "react-hot-toast";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import dashboardRoutes from "../../../Data/DashboardRoutes";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {tokens} from "../../../theme";
 import Select from 'react-select';
 import React, {useEffect, useState} from "react";
-import {useDeleteCategoryMutation, useGetCategoriesQuery} from "../../../Data/Api/CategoriesApi";
+import {
+    useDeleteCategoryMutation,
+    useGetCategoriesQuery,
+    useUpdateCategoryMutation
+} from "../../../Data/Api/CategoriesApi";
 import UploadAndDisplayImage from "../../../components/ImageHandler";
 
-const AddProductPage = () => {
+const EditProductPage = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
-    const [addProductRequest, {isLoading: isAdd, data: ddd}] = useAddProductMutation();
-
+    const [updateProductRequest, {isLoading: isAdd, data: ddd}] = useUpdateProductMutation();
+    const location = useLocation();
     const [category, setCategory] = useState();
     const [file, setFile] = useState();
     const [categories, setCategories] = useState([]);
@@ -27,7 +31,7 @@ const AddProductPage = () => {
 
     useEffect(() => {
         if (data && categories.length === 0) {
-
+            const cats = categories;
             data?.data?.forEach((element) => {
                     categories.push({
                         value: element.id,
@@ -43,22 +47,28 @@ const AddProductPage = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const initValues = {
-        name: '',
-        description: "",
-        price: ''
-    }
+        name: location.state.name,
+        price: location.state.price,
+        description: location.state.description,
+    };
+    useEffect(() => {
+        setCategory({value: location.state.category, label: location.state.categoryname})
+    }, []);
     const handAddProduct = async (values) => {
         // setIsAddCategory(true);
         if (!category) {
             toast.error('pleas Selecte Category')
             return;
         }
-         await addProductRequest({
-            name: values.name,
-            price: values.price,
-            category: category.value,
-            description: values.description,
-        }, file?.target?.files).unwrap()
+        await updateProductRequest({
+            id: location.state.id,
+            payload: {
+                name: values.name,
+                price: values.price,
+                category: category.value,
+                description: values.description,
+            }
+        }).unwrap()
             .then((payload) => {
                 toast.success(payload.message);
                 navicate(dashboardRoutes.products);
@@ -78,7 +88,7 @@ const AddProductPage = () => {
         >
             <Card sx={{p: 2}} style={{backgroundColor: colors.blueAccent[900]}}>
                 <> <Typography component="h1" variant="h5">
-                    Add New Product
+                    Edit Product
                 </Typography>
                     <Formik
                         onSubmit={handAddProduct}
@@ -161,7 +171,7 @@ const AddProductPage = () => {
                                     fullWidth
                                     sx={{mt: 3, mb: 2}}
                                 >
-                                    Add Product
+                                    Update Product
                                 </LoadingButton>
                             </Box>
 
@@ -183,10 +193,6 @@ const checkoutSchema = yup.object().shape({
     description: yup.string().required("required"),
 
 });
-const initialValues = {
-    name: "",
-    price: "",
-    description: "",
-};
 
-export default AddProductPage;
+
+export default EditProductPage;

@@ -8,11 +8,14 @@ const dashboardRoutes = {
     // products
     products: '/dashboard/products',
     addProduct: '/dashboard/addProduct',
+    editProduct: '/dashboard/edit-product',
+
     //orders
     orders: '/dashboard/orders',
     //categories
     categories: '/dashboard/categories',
-    addCtegory: '/dashboard/add-category',
+    addCategory: '/dashboard/add-category',
+    editCategory: '/dashboard/edit-category',
     auth: '/dashboard/auth',
     login: '/dashboard/auth/login',
     register: '/dashboard/auth/register',

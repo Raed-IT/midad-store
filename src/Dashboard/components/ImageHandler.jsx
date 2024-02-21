@@ -3,7 +3,7 @@ import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-const UploadAndDisplayImage = () => {
+const UploadAndDisplayImage = ({onchange}) => {
 
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -33,6 +33,7 @@ const UploadAndDisplayImage = () => {
             >
                 Upload Image
                 <VisuallyHiddenInput type="file" name="myImage" onChange={(event) => {
+                    onchange(event)
                     console.log(event.target.files[0]);
                     setSelectedImage(event.target.files[0]);
                 }}/>

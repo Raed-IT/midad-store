@@ -15,6 +15,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import toast from "react-hot-toast";
 
 const CategoriesPage = () => {
+
     const {data, error, isLoading} = useGetCategoriesQuery();
     const [deletedCategoryRequest, {isLoading: isDelete}] = useDeleteCategoryMutation();
     const theme = useTheme();
@@ -44,6 +45,9 @@ const CategoriesPage = () => {
                     setSelectedCategory(props.row)
                     setIsOpen(!isOpen);
                 }} icon={<MdOutlineDelete/>} label="Delete"/>,
+                <GridActionsCellItem onClick={() => {
+                    navigate(dashboardRoutes.editCategory, {state:props.row});
+                }} icon={<FaRegEdit/>} label="Edit"/>,
             ]
         }
     ];
@@ -53,7 +57,7 @@ const CategoriesPage = () => {
             <Header
                 title="Categories"
                 subtitle="List of Categoruies in yor Store "
-                children={<Button onClick={() => navigate(dashboardRoutes.addCtegory)} style={{height: '40px'}}
+                children={<Button onClick={() => navigate(dashboardRoutes.addCategory)} style={{height: '40px'}}
                                   variant="outlined"
                                   color='success'>
                     Add Category

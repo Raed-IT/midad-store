@@ -19,7 +19,7 @@ import toast from "react-hot-toast";
 export const LoginPage = () => {
     const navigate = useNavigate();
 
-    const {login} = useAuth();
+    const {login,token} = useAuth();
     const [isLogin, setIsLogin] = useState(false);
 
 
@@ -40,10 +40,12 @@ export const LoginPage = () => {
             password: values?.password
         };
         await login(user).then(() => {
-            setIsLogin(false)
+            if (token){
             toast.success("تم تسجيل الدخول ");
             setTimeout(() => navigate(dashboardRoutes.dashboard), 1000)
+            }
         });
+            setIsLogin(false)
 
     };
     return <Container component="main" maxWidth="xs">

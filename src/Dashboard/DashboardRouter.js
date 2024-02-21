@@ -11,6 +11,8 @@ import {LoginPage} from "./Pages/authPages/loginPage";
 import UsersPage from "./Pages/UsedrsPages/UsersPage";
 import AddCategoryPage from "./Pages/CategoriesPages/AddCategoryPage";
 import AddUserPage from "./Pages/UsedrsPages/AddUserPage";
+import EditCategoryPage from "./Pages/CategoriesPages/EditCategoryPage";
+import EditProductPage from "./Pages/ProductsPages/EditProductPage";
 
 const dashboardRouter =
     [{
@@ -26,6 +28,10 @@ const dashboardRouter =
                 element: <ProductsPage/>,
             },
             {
+                path: dashboardRoutes.orders,
+                element: <OrdersPage/>,
+            },
+            {
                 path: dashboardRoutes.users,
                 element: <UsersPage/>,
             }, {
@@ -37,20 +43,30 @@ const dashboardRouter =
                 element: <AddProductPage/>,
             },
             {
+                path: dashboardRoutes.editProduct,
+                element: <EditProductPage/>,
+            },
+            {
                 path: dashboardRoutes.categories,
                 element: <CategoriesPage/>,
-            }, {
-                path: dashboardRoutes.addCtegory,
+            },
+            {
+                path: dashboardRoutes.editCategory,
+                element: <EditCategoryPage/>,
+            },
+            {
+                path: dashboardRoutes.addCategory,
                 element: <AddCategoryPage/>,
             },
 
+
         ],
-        errorElement: <>Not Found</>
+
     },
         {
             path: dashboardRoutes.login,
             element: <LoginPage/>,
-            errorElement: <>Not Found</>
+
         }
     ];
 export default dashboardRouter;
